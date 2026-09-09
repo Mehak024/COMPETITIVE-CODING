@@ -1,0 +1,20 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        subset = []
+        
+        def backtrack(index):
+            if index == len(nums):
+                result.append(subset[:])  # copy of current subset
+                return
+            
+            # Option 1: don't include nums[index]
+            backtrack(index + 1)
+            
+            # Option 2: include nums[index]
+            subset.append(nums[index])
+            backtrack(index + 1)
+            subset.pop()  # backtrack
+        
+        backtrack(0)
+        return result
